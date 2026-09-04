@@ -12,5 +12,14 @@ export async function onRequest(context) {
         await deleteShortLink(env, metadata.shortId);
     }
 
+    // Physical deletion from Cloudflare R2 if using R2 storage
+    if (env.img_r2 && (params.id.startsWith("r2-") || metadata?.provider === "r2")) {
+        try {
+            await env.img_r2.delete(params.id);
+        } catch (e) {
+            console.error("Failed to delete object from R2:", e);
+        }
+    }
+
     return jsonResponse(params.id);
 }

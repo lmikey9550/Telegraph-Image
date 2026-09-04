@@ -167,7 +167,7 @@
       },
       handleDelete(index, key) {
         console.log(key);
-        if (confirm("确认从后台列表删除该记录吗？这不会删除源文件；如需禁止访问请加入黑名单。")) {
+        if (confirm("确认彻底删除该图片吗？R2源文件与后台记录将被一并物理删除。")) {
           console.log("Yes")
           var requestOptions = {
             method: 'GET',
